@@ -1,16 +1,12 @@
-// const element = document.createElement('h1');
-// element.innerText = 'Hello, Platzi Badges!';
+import React from 'react'; // analogo a createElement
+import ReactDOM from 'react-dom'; // analogo a appendChild
 
-// const container = document.getElementById('app');
+import 'bootstrap/dist/css/bootstrap.css'; //estilos
+import './assets/styles/global.css' //estilos globales
 
-// container.appendChild(element);
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-const element = <h1>Hello, Platzi Badges!</h1>;
+import Home from './containers/Home'
 
 const container = document.getElementById('app');
 
 // ReactDOM.render(__qué__, __dónde__);
-ReactDOM.render(element, container);
+ReactDOM.render(<Home />, container);
