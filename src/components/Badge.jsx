@@ -1,16 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import badgeHeader from '../assets/static/badge-header.svg'
 import '../assets/styles/components/Badge.css'
 
 const Badge = (props) => {
-    const {        
-        firstName="Andrés",
-        lastName="García",
-        avatarUrl="https://s.gravatar.com/avatar/f5e615490b0f1825ee0157aed73da46a?s=80",
-        jobTitle="Fronter Engineer",
-        twitter="andfgp"} = props;
-    
-    return (
+    const {  
+        user,   
+        firstName=user.firstName,
+        lastName=user.lastName,
+        avatarUrl=user.avatarUrl,
+        jobTitle=user.jobTitle,
+        twitter=user.twitter} = props;  
+
+        return (
         <div className="Badge">
             <div className="Badge__header">
                 <img src={badgeHeader} alt="Logo" />
@@ -30,4 +32,10 @@ const Badge = (props) => {
     )
 }
 
-export default Badge
+const mapStateToProps = (state) => {
+    return {
+      user: state.user,
+    };
+  };
+  
+export default connect(mapStateToProps, null)(Badge); //connect(props,actions)

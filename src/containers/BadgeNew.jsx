@@ -6,6 +6,7 @@ import Badge from '../components/Badge'
 import BadgeForm from '../components/BadgeForm'
 
 const Home = () => {
+
     return (
         <>
             <Navbar />
@@ -19,7 +20,7 @@ const Home = () => {
                         <Badge />
                     </div>
                     <div className="col-6">
-                        <BadgeForm />
+                        <BadgeForm/>
                     </div>
                 </div>
             </div>
@@ -28,4 +29,4 @@ const Home = () => {
     )
 }
 
-export default Home
+  export default Home;
