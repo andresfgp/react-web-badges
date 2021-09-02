@@ -9,6 +9,10 @@ import 'bootstrap/dist/css/bootstrap.css'; //estilos
 import './assets/styles/global.css'; //estilos globales
 
 const initialState = {
+  'rickAndMortyState': {
+    loading: '',
+    error: '',
+    data: '' },
   'user': {},
   'users': [],
 };

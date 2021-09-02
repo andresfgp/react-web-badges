@@ -10,6 +10,12 @@ const reducer = (state, action) => {
         ...state, //traer el estado que ya tengo
         users: [...state.users, action.payload],
       };
+
+    case 'REQUEST_DATA':
+      return {
+        ...state, //traer el estado que ya tengo
+        rickAndMortyState: { data: action.payload, loading: true, error: null },
+      };
     default:
       return state;
 

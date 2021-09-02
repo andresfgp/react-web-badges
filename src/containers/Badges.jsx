@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 import '../assets/styles/Badges.css';
 import confLogo from '../assets/static/badge-header.svg';
 import twitter from '../assets/static/twitter.png';
+import { requestData } from '../actions';
 
 const Badges = (props) => {
-  const { users } = props;
+  const { users, rickAndMortyState } = props;
+
+  const fetchCharacters = async () => {
+    const response = await fetch('https://rickandmortyapi.com/api/character');
+    const data = await response.json();
+    props.requestData(data.results);
+  };
+
+  useEffect(() => {
+    fetchCharacters();
+  }, []);
+
   return (
     <>
-      <Navbar />
       <div className='Badges'>
         <div className='Badges__hero'>
           <div className='Badges__container'>
@@ -50,6 +60,28 @@ const Badges = (props) => {
                   </li>
                 )))}
             </div>
+            <div className='list-unstyled'>
+              {rickAndMortyState.length > 0 && (rickAndMortyState.map((item) => (
+                <li className='Badges__list-li' key={item.id}>
+                  <img src={item.image} alt='logo' />
+                  <div>
+                    <p className='Badges__list-name'>
+                      {item.name}
+                    </p>
+                    <p className='Badges__list-name'>
+                      Species:
+                      {' '}
+                      {item.species}
+                    </p>
+                    <p className='Badges__list-jobTitle'>
+                      Status:
+                      {' '}
+                      {item.status}
+                    </p>
+                  </div>
+                </li>
+              )))}
+            </div>
           </div>
         </div>
 
@@ -60,9 +92,14 @@ const Badges = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    rickAndMortyState: state.rickAndMortyState.data,
     user: state.user,
     users: state.users,
   };
 };
 
-export default connect(mapStateToProps, null)(Badges);
+const mapDispatchToProps = {
+  requestData,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Badges);

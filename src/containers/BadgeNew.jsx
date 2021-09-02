@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { connect, useStore } from 'react-redux';
 import badgeHeader from '../assets/static/badge-header.svg';
 import '../assets/styles/BadgesNew.css';
-import Navbar from '../components/Navbar';
 import Badge from '../components/Badge';
 // import BadgeForm from '../components/BadgeForm';
 import { formRequest, addUsers } from '../actions';
@@ -62,7 +61,6 @@ const BadgeNew = (props) => {
 
   return (
     <>
-      <Navbar />
       <div className='BadgeNew__hero'>
         <img src={badgeHeader} alt='' className='img-flui' />
       </div>
