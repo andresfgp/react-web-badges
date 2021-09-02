@@ -5,24 +5,32 @@ import '../assets/styles/Badges.css';
 import confLogo from '../assets/static/badge-header.svg';
 import twitter from '../assets/static/twitter.png';
 import { requestData } from '../actions';
+import Loader from '../components/Loader';
 
 const Badges = (props) => {
 
   const [nextPage, setNextPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const { users, rickAndMortyState } = props;
 
   const fetchCharacters = async (count) => {
-    const response = await fetch(`https://rickandmortyapi.com/api/character?page=${count}`);
-    const data = await response.json();
-    (nextPage === 1) ? props.requestData(data.results) : props.requestData([].concat(rickAndMortyState.data, data.results));
-    // console.log(`count ${count}`);
-    // console.log(rickAndMortyState.data);
-    // console.log(data.results);
+    try {
+      const response = await fetch(`https://rickandmortyapi.com/api/character?page=${count}`);
+      const data = await response.json();
+      (nextPage === 1) ? props.requestData(data.results) : props.requestData([].concat(rickAndMortyState.data, data.results));
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     fetchCharacters(nextPage);
+    setLoading(true);
   }, [nextPage]);
 
   const handleSubmit = (e) => { // add page
@@ -30,7 +38,6 @@ const Badges = (props) => {
     setNextPage(nextPage + 1);
   };
 
-  // console.log(rickAndMortyState);
   return (
     <>
       <div className='Badges'>
@@ -46,7 +53,6 @@ const Badges = (props) => {
             New Badge
           </Link>
         </div>
-
         <div className='Badges__list'>
           <div>
             <div className='list-unstyled'>
@@ -95,10 +101,16 @@ const Badges = (props) => {
               )))}
             </div>
           </div>
+        </div>
+        {error && <p>Something went wrong.</p>}
+        {loading && (
           <div className='Badges__buttons-button'>
-            {/* eslint-disable-next-line react/button-has-type */}
-            <button className='btn btn-primary' onClick={handleSubmit}> More Badges</button>
+            <Loader />
           </div>
+        )}
+        <div className='Badges__buttons-button'>
+          {/* eslint-disable-next-line react/button-has-type */}
+          <button className='btn btn-primary' onClick={handleSubmit}> More Badges</button>
         </div>
       </div>
     </>

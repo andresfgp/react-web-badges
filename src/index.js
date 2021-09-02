@@ -11,8 +11,6 @@ import './assets/styles/global.css'; //estilos globales
 const initialState = {
   'rickAndMortyState': {
     data: '',
-    error: '',
-    loading: '',
   },
   'user': {},
   'users': [],

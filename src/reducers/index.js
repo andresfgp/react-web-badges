@@ -14,7 +14,7 @@ const reducer = (state, action) => {
     case 'REQUEST_DATA':
       return {
         ...state, //traer el estado que ya tengo
-        rickAndMortyState: { data: action.payload, error: null, loading: true },
+        rickAndMortyState: { data: action.payload },
       };
 
     default:
