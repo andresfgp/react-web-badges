@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect, useStore } from 'react-redux';
+import md5 from 'md5';
 import badgeHeader from '../assets/static/badge-header.svg';
 import '../assets/styles/BadgesNew.css';
 import Badge from '../components/Badge';
-// import BadgeForm from '../components/BadgeForm';
 import { formRequest, addUsers } from '../actions';
 
 const BadgeNew = (props) => {
@@ -29,13 +29,17 @@ const BadgeNew = (props) => {
   const user1 = {
     firstName: 'Andrés',
     lastName: 'García',
-    avatarUrl: 'https://s.gravatar.com/avatar/f5e615490b0f1825ee0157aed73da46a?s=80',
+    avatarUrl: 'https://s.gravatar.com/avatar/f5e615490b0f1825ee0157aed73da46a?d=identicon',
+    email: 'andres.fgp@hotmail.com',
     jobTitle: 'Frontend Engineer',
     twitter: 'andfgp',
     id: '8000',
   };
 
   const [form, setValues] = useState(user1);
+
+  const hash = md5(form.email);
+  form.avatarUrl = `https://s.gravatar.com/avatar/${hash}?d=identicon`;
 
   const handleInput = (e) => { //recopilar informacion de formulario
     form.id = generateUUID();
@@ -99,7 +103,7 @@ const BadgeNew = (props) => {
                   <input
                     onChange={handleInput}
                     type='email'
-                    name='avatarUrl'
+                    name='email'
                     className='form-control'
                   />
                 </div>
