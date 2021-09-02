@@ -16,7 +16,7 @@
   width: 100%;
   max-width: 580px;
   margin: 0 auto;
-  padding: 0;
+  padding: 10px;
 }
 
 .Badges_conf-logo {
@@ -26,6 +26,11 @@
 .Badges__buttons {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+.Badges__buttons-button {
+  display: flex;
+  justify-content:space-around;
   margin-bottom: 1rem;
 }
 

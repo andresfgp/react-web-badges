@@ -32,7 +32,7 @@ const BadgeNew = (props) => {
     avatarUrl: 'https://s.gravatar.com/avatar/f5e615490b0f1825ee0157aed73da46a?s=80',
     jobTitle: 'Frontend Engineer',
     twitter: 'andfgp',
-    id: '',
+    id: '8000',
   };
 
   const [form, setValues] = useState(user1);
@@ -53,7 +53,6 @@ const BadgeNew = (props) => {
     e.preventDefault();
     if (!store.getState().users.some((item) => item.id === form.id)) {
       props.addUsers(form);
-      // console.log(props);
       props.history.push('/');
     }
     // console.log(store.getState());

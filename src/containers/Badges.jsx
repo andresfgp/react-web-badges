@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../assets/styles/Badges.css';
@@ -7,18 +7,30 @@ import twitter from '../assets/static/twitter.png';
 import { requestData } from '../actions';
 
 const Badges = (props) => {
+
+  const [nextPage, setNextPage] = useState(1);
+
   const { users, rickAndMortyState } = props;
 
-  const fetchCharacters = async () => {
-    const response = await fetch('https://rickandmortyapi.com/api/character');
+  const fetchCharacters = async (count) => {
+    const response = await fetch(`https://rickandmortyapi.com/api/character?page=${count}`);
     const data = await response.json();
-    props.requestData(data.results);
+    (nextPage === 1) ? props.requestData(data.results) : props.requestData([].concat(rickAndMortyState.data, data.results));
+    // console.log(`count ${count}`);
+    // console.log(rickAndMortyState.data);
+    // console.log(data.results);
   };
 
   useEffect(() => {
-    fetchCharacters();
-  }, []);
+    fetchCharacters(nextPage);
+  }, [nextPage]);
 
+  const handleSubmit = (e) => { // add page
+    e.preventDefault();
+    setNextPage(nextPage + 1);
+  };
+
+  // console.log(rickAndMortyState);
   return (
     <>
       <div className='Badges'>
@@ -36,7 +48,7 @@ const Badges = (props) => {
         </div>
 
         <div className='Badges__list'>
-          <div className='Badges__container'>
+          <div>
             <div className='list-unstyled'>
               {users.length > 0 && (
                 users.map((item) => (
@@ -61,7 +73,7 @@ const Badges = (props) => {
                 )))}
             </div>
             <div className='list-unstyled'>
-              {rickAndMortyState.length > 0 && (rickAndMortyState.map((item) => (
+              {rickAndMortyState.data.length > 0 && (rickAndMortyState.data.map((item) => (
                 <li className='Badges__list-li' key={item.id}>
                   <img src={item.image} alt='logo' />
                   <div>
@@ -83,8 +95,11 @@ const Badges = (props) => {
               )))}
             </div>
           </div>
+          <div className='Badges__buttons-button'>
+            {/* eslint-disable-next-line react/button-has-type */}
+            <button className='btn btn-primary' onClick={handleSubmit}> More Badges</button>
+          </div>
         </div>
-
       </div>
     </>
   );
@@ -92,7 +107,7 @@ const Badges = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    rickAndMortyState: state.rickAndMortyState.data,
+    rickAndMortyState: state.rickAndMortyState,
     user: state.user,
     users: state.users,
   };

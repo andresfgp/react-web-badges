@@ -10,9 +10,10 @@ import './assets/styles/global.css'; //estilos globales
 
 const initialState = {
   'rickAndMortyState': {
-    loading: '',
+    data: '',
     error: '',
-    data: '' },
+    loading: '',
+  },
   'user': {},
   'users': [],
 };
