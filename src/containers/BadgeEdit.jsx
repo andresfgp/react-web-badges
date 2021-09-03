@@ -1,70 +1,61 @@
-import React, { useState } from 'react';
-import { connect, useStore } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import md5 from 'md5';
 import badgeHeader from '../assets/static/badge-header.svg';
-import '../assets/styles/BadgeNew.css';
+import '../assets/styles/BadgeEdit.css';
 import Badge from '../components/Badge';
-import { formRequest, addUsers } from '../actions';
+import { formRequest, getDataId, editDataId, eraseDataId } from '../actions';
 
-const BadgeNew = (props) => {
+const BadgeEdit = (props) => {
 
-  const store = useStore();
+  const { user, users } = props;
 
-  function generateUUID() { // Public Domain/MIT
-    let d = new Date().getTime();//Timestamp
-    let d2 = (performance && performance.now && (performance.now() * 1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      let r = Math.random() * 16;//random number between 0 and 16
-      if (d > 0) { //Use timestamp until depleted
-        r = (d + r) % 16 | 0;
-        d = Math.floor(d / 16);
-      } else { //Use microseconds since page-load if supported
-        r = (d2 + r) % 16 | 0;
-        d2 = Math.floor(d2 / 16);
-      }
-      return (c === 'x' ? r : (r && 0x3 | 0x8)).toString(16);
-    });
-  }
+  // eslint-disable-next-line react/destructuring-assignment
+  const { id } = props.match.params;
 
-  const user1 = {
-    firstName: 'Andrés',
-    lastName: 'García',
-    avatarUrl: 'https://s.gravatar.com/avatar/f5e615490b0f1825ee0157aed73da46a?d=identicon',
-    email: 'andres.fgp@hotmail.com',
-    jobTitle: 'Frontend Engineer',
-    twitter: 'andfgp',
-    id: '8000',
-  };
+  const userID = users.filter((item) => (item.id === id));
 
-  const [form, setValues] = useState(user1);
+  const [formID, setValues] = useState(userID[0]);
 
-  const hash = md5(form.email);
-  form.avatarUrl = `https://s.gravatar.com/avatar/${hash}?d=identicon`;
+  const hash = md5(user.email);
+  user.avatarUrl = `https://s.gravatar.com/avatar/${hash}?d=identicon`;
 
   const handleInput = (e) => { //recopilar informacion de formulario
-    form.id = generateUUID();
-    // console.log(store.getState());
     setValues({
-      ...form,
+      ...formID,
       [e.target.name]: e.target.value,
     });
   };
 
   // eslint-disable-next-line react/destructuring-assignment
-  props.formRequest(form);
+  props.formRequest(formID);
+
+  const fetchData = () => {
+    try {
+      props.getDataId(id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleSubmit = (e) => { // enviar informacion formulario
     e.preventDefault();
-    if (!store.getState().users.some((item) => item.id === form.id)) {
-      props.addUsers(form);
-      props.history.push('/');
-    }
-    // console.log(store.getState());
+    props.editDataId(user);
+    props.history.push('/');
+  };
+
+  const handleErase = (itemId) => {
+    props.eraseDataId(itemId);
+    props.history.goBack();
   };
 
   return (
     <>
-      <div className='BadgeNew__hero'>
+      <div className='BadgeEdit__hero'>
         <img src={badgeHeader} alt='' className='img-flui' />
       </div>
 
@@ -75,7 +66,7 @@ const BadgeNew = (props) => {
           </div>
           <div className='col-6'>
             <div>
-              <h1>New Attendant</h1>
+              <h1>Edit Attendant</h1>
               <form onSubmit={handleSubmit}>
                 <div className='form-group'>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -128,7 +119,9 @@ const BadgeNew = (props) => {
                   />
                 </div>
                 {/* eslint-disable-next-line react/button-has-type */}
-                <button className='btn btn-primary'> Save</button>
+                <button className='btn btn-primary'> Edit</button>
+                {/* eslint-disable-next-line react/button-has-type */}
+                <button className='btn btn-danger ' onClick={() => handleErase(id)}> Erase</button>
               </form>
             </div>
           </div>
@@ -138,9 +131,18 @@ const BadgeNew = (props) => {
     </>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    users: state.users,
+  };
+};
 const mapDispatchToProps = {
   formRequest,
-  addUsers,
+  getDataId,
+  editDataId,
+  eraseDataId,
 };
 
-export default connect(null, mapDispatchToProps)(BadgeNew);
+export default connect(mapStateToProps, mapDispatchToProps)(BadgeEdit);

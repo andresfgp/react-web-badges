@@ -61,6 +61,10 @@
   padding: 10px;
 }
 
+.Badges__list-li:hover{
+  background: rgba(0,0,0,0.2);
+}
+
 .Badges__list-li>img{
   border-radius: 50%;
   margin: 0px 0px 0px 20px;

@@ -56,6 +56,8 @@ a.link-unstyled:hover {
   color: #fff;
   background-color: #CD4040;
   border-color: #CD4040;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 .btn.btn-danger:not(:disabled):not(.disabled):hover {

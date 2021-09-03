@@ -12,3 +12,19 @@ export const requestData = (payload) => ({ //payload= informacion que vamos a tr
   type: 'REQUEST_DATA',
   payload,
 });
+
+export const getDataId = (payload) => ({ //payload= informacion que vamos a transmitir
+  type: 'GET_DATA_ID',
+  payload,
+});
+
+export const editDataId = (payload) => ({ //payload= informacion que vamos a transmitir
+  type: 'EDIT_DATA_ID',
+  payload,
+});
+
+export const eraseDataId = (payload) => ({ //payload= informacion que vamos a transmitir
+  type: 'ERASE_DATA_ID',
+  payload,
+});
+
