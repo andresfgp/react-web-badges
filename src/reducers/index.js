@@ -33,7 +33,6 @@ const reducer = (state, action) => {
             jobTitle: action.payload.jobTitle,
             twitter: action.payload.twitter,
             id: action.payload.id,
-            complete: true,
           } : item)),
       };
     case 'ERASE_DATA_ID':

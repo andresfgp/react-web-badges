@@ -13,7 +13,7 @@ const BadgeEdit = (props) => {
   // eslint-disable-next-line react/destructuring-assignment
   const { id } = props.match.params;
 
-  const userID = users.filter((item) => (item.id === id));
+  const userID = users.filter((item) => ((item.id === id)));
 
   const [formID, setValues] = useState(userID[0]);
 
@@ -53,6 +53,8 @@ const BadgeEdit = (props) => {
     props.history.goBack();
   };
 
+  // document.getElementsByClassName('form-control').value = 'Hola';
+
   return (
     <>
       <div className='BadgeEdit__hero'>
@@ -76,6 +78,7 @@ const BadgeEdit = (props) => {
                     type='text'
                     name='firstName'
                     className='form-control'
+                    defaultValue={formID.firstName}
                   />
                 </div>
                 <div className='form-group'>
@@ -86,6 +89,7 @@ const BadgeEdit = (props) => {
                     type='text'
                     name='lastName'
                     className='form-control'
+                    defaultValue={formID.lastName}
                   />
                 </div>
                 <div className='form-group'>
@@ -96,6 +100,8 @@ const BadgeEdit = (props) => {
                     type='email'
                     name='email'
                     className='form-control'
+                    defaultValue={formID.email}
+
                   />
                 </div>
                 <div className='form-group'>
@@ -106,6 +112,7 @@ const BadgeEdit = (props) => {
                     type='text'
                     name='jobTitle'
                     className='form-control'
+                    defaultValue={formID.jobTitle}
                   />
                 </div>
                 <div className='form-group'>
@@ -116,6 +123,7 @@ const BadgeEdit = (props) => {
                     type='text'
                     name='twitter'
                     className='form-control'
+                    defaultValue={formID.twitter}
                   />
                 </div>
                 {/* eslint-disable-next-line react/button-has-type */}
