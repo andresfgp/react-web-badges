@@ -34,12 +34,15 @@ const BadgeNew = (props) => {
     jobTitle: 'Frontend Engineer',
     twitter: 'andfgp',
     id: '8000',
+    name: '',
   };
 
   const [form, setValues] = useState(user1);
 
   const hash = md5(form.email);
   form.avatarUrl = `https://s.gravatar.com/avatar/${hash}?d=identicon`;
+
+  form.name = `${form.firstName} ${form.lastName}`;
 
   const handleInput = (e) => { //recopilar informacion de formulario
     form.id = generateUUID();

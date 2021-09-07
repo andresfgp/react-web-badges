@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../assets/styles/components/Search.css';
-import { getSearchVideo } from '../actions';
+import { getSearchVideoBadges, getSearchVideoRAndM } from '../actions';
 
 const Search = (props) => {
-  const { getSearchVideo } = props;
+  const { getSearchVideoBadges, getSearchVideoRAndM } = props;
 
   const handleInput = (event) => { //recopilar informacion del search
-    getSearchVideo(event.target.value);
+    getSearchVideoBadges(event.target.value);
+    getSearchVideoRAndM(event.target.value);
     //console.log(event.target.value);
   };
 
@@ -27,7 +28,8 @@ const Search = (props) => {
 };
 
 const mapDispatchToProps = {
-  getSearchVideo,
+  getSearchVideoBadges,
+  getSearchVideoRAndM,
 };
 
 export default connect(null, mapDispatchToProps)(Search);

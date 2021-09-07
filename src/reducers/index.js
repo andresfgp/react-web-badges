@@ -33,6 +33,7 @@ const reducer = (state, action) => {
             jobTitle: action.payload.jobTitle,
             twitter: action.payload.twitter,
             id: action.payload.id,
+            name: action.payload.name,
           } : item)),
       };
     case 'ERASE_DATA_ID':
@@ -41,12 +42,23 @@ const reducer = (state, action) => {
         users: state.users.filter((items) => items.id !== action.payload),
       };
 
-    case 'GET_SEARCH_VIDEO':
-      if (action.payload === '') return { ...state, searchResult: [] };
+    case 'GET_SEARCH_VIDEO_BADGES':
+      if (action.payload === '') return { ...state, searchResultBadges: [] };
       return {
         ...state,
-        searchResult: state.users.filter((item) => item.firstName.toLowerCase().includes(action.payload.toLowerCase()) ||
-          item.lastName.toLowerCase().includes(action.payload.toLowerCase())),
+        searchResultBadges: state.users.filter((item) => item.name.toLowerCase().includes(action.payload.toLowerCase()) ||
+          item.twitter.toLowerCase().includes(action.payload.toLowerCase()) ||
+          item.jobTitle.toLowerCase().includes(action.payload.toLowerCase())),
+      };
+      // item.firstName.toLowerCase().includes(action.payload.toLowerCase()) ||
+      //     item.lastName.toLowerCase().includes(action.payload.toLowerCase())
+    case 'GET_SEARCH_VIDEO_RANDM':
+      if (action.payload === '') return { ...state, searchResultRAndM: [] };
+      return {
+        ...state,
+        searchResultRAndM: state.rickAndMortyState.data.filter((item) => item.name.toLowerCase().includes(action.payload.toLowerCase()) ||
+        item.species.toLowerCase().includes(action.payload.toLowerCase()) ||
+        item.status.toLowerCase().includes(action.payload.toLowerCase())),
       };
     default:
       return state;

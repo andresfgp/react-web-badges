@@ -14,7 +14,8 @@ const initialState = {
   },
   'user': {},
   'users': [],
-  'searchResult': [],
+  'searchResultBadges': [],
+  'searchResultRAndM': [],
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();

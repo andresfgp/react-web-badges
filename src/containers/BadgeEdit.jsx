@@ -20,6 +20,8 @@ const BadgeEdit = (props) => {
   const hash = md5(user.email);
   user.avatarUrl = `https://s.gravatar.com/avatar/${hash}?d=identicon`;
 
+  user.name = `${user.firstName} ${user.lastName}`;
+
   const handleInput = (e) => { //recopilar informacion de formulario
     setValues({
       ...formID,

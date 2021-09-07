@@ -28,7 +28,12 @@ export const eraseDataId = (payload) => ({ //payload= informacion que vamos a tr
   payload,
 });
 
-export const getSearchVideo = (payload) => ({
-  type: 'GET_SEARCH_VIDEO',
+export const getSearchVideoBadges = (payload) => ({
+  type: 'GET_SEARCH_VIDEO_BADGES',
+  payload,
+});
+
+export const getSearchVideoRAndM = (payload) => ({
+  type: 'GET_SEARCH_VIDEO_RANDM',
   payload,
 });

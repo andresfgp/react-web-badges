@@ -10,7 +10,7 @@ import Search from '../components/Search';
 
 const Badges = (props) => {
 
-  const { users, rickAndMortyState, searchResult } = props;
+  const { users, rickAndMortyState, searchResultBadges, searchResultRAndM } = props;
 
   const [nextPage, setNextPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -52,8 +52,8 @@ const Badges = (props) => {
         <Search />
         <div className='Badges__list'>
           <div className='list-unstyled'>
-            {searchResult.length > 0 && (
-              searchResult.map((item) => (
+            {searchResultBadges.length > 0 && (
+              searchResultBadges.map((item) => (
                 <Link className='text-reset text-decoration-none' to={`/BadgeEdit/${item.id}`} key={item.id}>
                   <li className='Badges__list-li'>
                     <img src={item.avatarUrl} alt='logo' />
@@ -76,6 +76,31 @@ const Badges = (props) => {
                 </Link>
               )))}
           </div>
+        </div>
+        <div className='list-unstyled'>
+          {searchResultRAndM.length > 0 && (
+            searchResultRAndM.map((item) => (
+              <a className='text-reset text-decoration-none' href='https://rickandmortyapi.com/' key={item.id}>
+                <li className='Badges__list-li'>
+                  <img src={item.image} alt='logo' />
+                  <div>
+                    <p className='Badges__list-name'>
+                      {item.name}
+                    </p>
+                    <p className='Badges__list-name'>
+                      Species:
+                      {' '}
+                      {item.species}
+                    </p>
+                    <p className='Badges__list-jobTitle'>
+                      Status:
+                      {' '}
+                      {item.status}
+                    </p>
+                  </div>
+                </li>
+              </a>
+            )))}
         </div>
       </div>
       <div className='Badges__container'>
@@ -157,7 +182,8 @@ const mapStateToProps = (state) => {
   return {
     rickAndMortyState: state.rickAndMortyState,
     users: state.users,
-    searchResult: state.searchResult,
+    searchResultBadges: state.searchResultBadges,
+    searchResultRAndM: state.searchResultRAndM,
   };
 };
 
