@@ -28,3 +28,7 @@ export const eraseDataId = (payload) => ({ //payload= informacion que vamos a tr
   payload,
 });
 
+export const getSearchVideo = (payload) => ({
+  type: 'GET_SEARCH_VIDEO',
+  payload,
+});

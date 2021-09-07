@@ -6,10 +6,11 @@ import confLogo from '../assets/static/badge-header.svg';
 import twitter from '../assets/static/twitter.png';
 import { requestData } from '../actions';
 import Loader from '../components/Loader';
+import Search from '../components/Search';
 
 const Badges = (props) => {
 
-  const { users, rickAndMortyState } = props;
+  const { users, rickAndMortyState, searchResult } = props;
 
   const [nextPage, setNextPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -44,6 +45,36 @@ const Badges = (props) => {
         <div className='Badges__hero'>
           <div className='Badges__container'>
             <img className='Badges_conf-logo' src={confLogo} alt='Conf Logo' />
+          </div>
+        </div>
+      </div>
+      <div className='Badges__container'>
+        <Search />
+        <div className='Badges__list'>
+          <div className='list-unstyled'>
+            {searchResult.length > 0 && (
+              searchResult.map((item) => (
+                <Link className='text-reset text-decoration-none' to={`/BadgeEdit/${item.id}`} key={item.id}>
+                  <li className='Badges__list-li'>
+                    <img src={item.avatarUrl} alt='logo' />
+                    <div>
+                      <p className='Badges__list-name'>
+                        {item.firstName}
+                        {' '}
+                        {item.lastName}
+                      </p>
+                      <p className='Badges__list-twitter'>
+                        <img src={twitter} alt='twitter' />
+                        @
+                        {item.twitter}
+                      </p>
+                      <p className='Badges__list-jobTitle'>
+                        {item.jobTitle}
+                      </p>
+                    </div>
+                  </li>
+                </Link>
+              )))}
           </div>
         </div>
       </div>
@@ -126,6 +157,7 @@ const mapStateToProps = (state) => {
   return {
     rickAndMortyState: state.rickAndMortyState,
     users: state.users,
+    searchResult: state.searchResult,
   };
 };
 

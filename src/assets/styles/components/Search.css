@@ -1,0 +1,35 @@
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100px;
+    border-radius: 0px 0px 40px 40px;
+  }
+
+  .isSearch{
+    background: rgba(255,255,255,0.2);
+  }
+  
+  .main__title {
+    color: black;
+    font-size: 25px;
+  }
+  
+  .input {
+  width: 100%;
+  background-color: rgba(255,255,255,0.1);
+  border: 2px solid black;
+  border-radius: 25px;
+  color: black;
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+  height: 50px;
+  margin-bottom: 20px;
+  outline: none;
+  padding: 0px 20px;
+}
+
+::placeholder {
+  color: black;
+}

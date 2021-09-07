@@ -40,6 +40,13 @@ const reducer = (state, action) => {
         ...state, //traer el estado que ya tengo
         users: state.users.filter((items) => items.id !== action.payload),
       };
+
+    case 'GET_SEARCH_VIDEO':
+      if (action.payload === '') return { ...state, searchResult: [] };
+      return {
+        ...state,
+        searchResult: state.users.filter((item) => item.firstName.toLowerCase().includes(action.payload.toLowerCase())),
+      };
     default:
       return state;
   }

@@ -14,6 +14,7 @@ const initialState = {
   },
   'user': {},
   'users': [],
+  'searchResult': [],
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
