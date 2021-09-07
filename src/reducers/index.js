@@ -45,7 +45,8 @@ const reducer = (state, action) => {
       if (action.payload === '') return { ...state, searchResult: [] };
       return {
         ...state,
-        searchResult: state.users.filter((item) => item.firstName.toLowerCase().includes(action.payload.toLowerCase())),
+        searchResult: state.users.filter((item) => item.firstName.toLowerCase().includes(action.payload.toLowerCase()) ||
+          item.lastName.toLowerCase().includes(action.payload.toLowerCase())),
       };
     default:
       return state;
