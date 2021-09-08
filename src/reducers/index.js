@@ -50,8 +50,7 @@ const reducer = (state, action) => {
           item.twitter.toLowerCase().includes(action.payload.toLowerCase()) ||
           item.jobTitle.toLowerCase().includes(action.payload.toLowerCase())),
       };
-      // item.firstName.toLowerCase().includes(action.payload.toLowerCase()) ||
-      //     item.lastName.toLowerCase().includes(action.payload.toLowerCase())
+
     case 'GET_SEARCH_VIDEO_RANDM':
       if (action.payload === '') return { ...state, searchResultRAndM: [] };
       return {

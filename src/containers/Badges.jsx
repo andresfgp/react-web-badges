@@ -11,7 +11,7 @@ import BadgesRAndM from '../components/BadgesRAndM';
 
 const Badges = (props) => {
 
-  const { rickAndMortyState } = props;
+  const { rickAndMortyState, searchResultRAndM, users, searchResultBadges } = props;
 
   const [nextPage, setNextPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -52,8 +52,8 @@ const Badges = (props) => {
       <div className='Badges__container'>
         <Search />
         <div className='Badges__list'>
-          <BadgesUsers stateBadge='searchResultBadges' />
-          <BadgesRAndM stateBadge='searchResultRAndM' />
+          <BadgesUsers stateBadge={searchResultBadges} />
+          <BadgesRAndM stateBadge={searchResultRAndM} />
         </div>
       </div>
       <div className='Badges__container'>
@@ -64,8 +64,8 @@ const Badges = (props) => {
         </div>
         <div className='Badges__list'>
           <div>
-            <BadgesUsers stateBadge='users' />
-            <BadgesRAndM stateBadge='rickAndMortyState' />
+            <BadgesUsers stateBadge={users} />
+            <BadgesRAndM stateBadge={rickAndMortyState.data} />
           </div>
         </div>
         {error && <p>Something went wrong.</p>}
@@ -86,6 +86,9 @@ const Badges = (props) => {
 const mapStateToProps = (state) => {
   return {
     rickAndMortyState: state.rickAndMortyState,
+    searchResultRAndM: state.searchResultRAndM,
+    users: state.users,
+    searchResultBadges: state.searchResultBadges,
   };
 };
 
