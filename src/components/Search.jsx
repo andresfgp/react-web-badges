@@ -9,8 +9,10 @@ const Search = (props) => {
   const handleInput = (event) => { //recopilar informacion del search
     getSearchVideoBadges(event.target.value);
     getSearchVideoRAndM(event.target.value);
-    //console.log(event.target.value);
   };
+
+  getSearchVideoBadges('');
+  getSearchVideoRAndM('');
 
   return (
     <>

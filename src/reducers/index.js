@@ -53,12 +53,15 @@ const reducer = (state, action) => {
 
     case 'GET_SEARCH_VIDEO_RANDM':
       if (action.payload === '') return { ...state, searchResultRAndM: [] };
-      return {
-        ...state,
-        searchResultRAndM: state.rickAndMortyState.data.filter((item) => item.name.toLowerCase().includes(action.payload.toLowerCase()) ||
+      if (state.rickAndMortyState.data.length > 0) {
+        return {
+          ...state,
+          searchResultRAndM: state.rickAndMortyState.data.filter((item) => item.name.toLowerCase().includes(action.payload.toLowerCase()) ||
         item.species.toLowerCase().includes(action.payload.toLowerCase()) ||
         item.status.toLowerCase().includes(action.payload.toLowerCase())),
-      };
+        };
+      }
+      return state;
     default:
       return state;
   }
