@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../assets/styles/Badges.css';
 import confLogo from '../assets/static/badge-header.svg';
-import twitter from '../assets/static/twitter.png';
 import { requestData } from '../actions';
 import Loader from '../components/Loader';
 import Search from '../components/Search';
+import BadgesUsers from '../components/BadgesUsers';
+import BadgesRAndM from '../components/BadgesRAndM';
 
 const Badges = (props) => {
 
-  const { users, rickAndMortyState, searchResultBadges, searchResultRAndM } = props;
+  const { rickAndMortyState } = props;
 
   const [nextPage, setNextPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -51,56 +52,8 @@ const Badges = (props) => {
       <div className='Badges__container'>
         <Search />
         <div className='Badges__list'>
-          <div className='list-unstyled'>
-            {searchResultBadges.length > 0 && (
-              searchResultBadges.map((item) => (
-                <Link className='text-reset text-decoration-none' to={`/BadgeEdit/${item.id}`} key={item.id}>
-                  <li className='Badges__list-li'>
-                    <img src={item.avatarUrl} alt='logo' />
-                    <div>
-                      <p className='Badges__list-name'>
-                        {item.firstName}
-                        {' '}
-                        {item.lastName}
-                      </p>
-                      <p className='Badges__list-twitter'>
-                        <img src={twitter} alt='twitter' />
-                        @
-                        {item.twitter}
-                      </p>
-                      <p className='Badges__list-jobTitle'>
-                        {item.jobTitle}
-                      </p>
-                    </div>
-                  </li>
-                </Link>
-              )))}
-          </div>
-        </div>
-        <div className='list-unstyled'>
-          {searchResultRAndM.length > 0 && (
-            searchResultRAndM.map((item) => (
-              <a className='text-reset text-decoration-none' href='https://rickandmortyapi.com/' key={item.id}>
-                <li className='Badges__list-li'>
-                  <img src={item.image} alt='logo' />
-                  <div>
-                    <p className='Badges__list-name'>
-                      {item.name}
-                    </p>
-                    <p className='Badges__list-name'>
-                      Species:
-                      {' '}
-                      {item.species}
-                    </p>
-                    <p className='Badges__list-jobTitle'>
-                      Status:
-                      {' '}
-                      {item.status}
-                    </p>
-                  </div>
-                </li>
-              </a>
-            )))}
+          <BadgesUsers stateBadge='searchResultBadges' />
+          <BadgesRAndM stateBadge='searchResultRAndM' />
         </div>
       </div>
       <div className='Badges__container'>
@@ -111,56 +64,8 @@ const Badges = (props) => {
         </div>
         <div className='Badges__list'>
           <div>
-            <div className='list-unstyled'>
-              {users.length > 0 && (
-                users.map((item) => (
-                  <Link className='text-reset text-decoration-none' to={`/BadgeEdit/${item.id}`} key={item.id}>
-                    <li className='Badges__list-li'>
-                      <img src={item.avatarUrl} alt='logo' />
-                      <div>
-                        <p className='Badges__list-name'>
-                          {item.firstName}
-                          {' '}
-                          {item.lastName}
-                        </p>
-                        <p className='Badges__list-twitter'>
-                          <img src={twitter} alt='twitter' />
-                          @
-                          {item.twitter}
-                        </p>
-                        <p className='Badges__list-jobTitle'>
-                          {item.jobTitle}
-                        </p>
-                      </div>
-                    </li>
-                  </Link>
-                )))}
-            </div>
-            <div className='list-unstyled'>
-              {rickAndMortyState.data.length > 0 && (
-                rickAndMortyState.data.map((item) => (
-                  <a className='text-reset text-decoration-none' href='https://rickandmortyapi.com/' key={item.id}>
-                    <li className='Badges__list-li'>
-                      <img src={item.image} alt='logo' />
-                      <div>
-                        <p className='Badges__list-name'>
-                          {item.name}
-                        </p>
-                        <p className='Badges__list-name'>
-                          Species:
-                          {' '}
-                          {item.species}
-                        </p>
-                        <p className='Badges__list-jobTitle'>
-                          Status:
-                          {' '}
-                          {item.status}
-                        </p>
-                      </div>
-                    </li>
-                  </a>
-                )))}
-            </div>
+            <BadgesUsers stateBadge='users' />
+            <BadgesRAndM stateBadge='rickAndMortyState' />
           </div>
         </div>
         {error && <p>Something went wrong.</p>}
@@ -181,9 +86,6 @@ const Badges = (props) => {
 const mapStateToProps = (state) => {
   return {
     rickAndMortyState: state.rickAndMortyState,
-    users: state.users,
-    searchResultBadges: state.searchResultBadges,
-    searchResultRAndM: state.searchResultRAndM,
   };
 };
 
