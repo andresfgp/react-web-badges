@@ -21,7 +21,12 @@ const Badges = (props) => {
 
   const fetchCharacters = async (count) => {
     try {
-      const response = await fetch(`https://rickandmortyapi.com/api/character?page=${count}`);
+      const response = await fetch(`https://rickandmortyapi.com/api/character?page=${count}`, {
+        'mode': 'cors',
+        'headers': {
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
       const data = await response.json();
       (nextPage === 1) ? props.requestData(data.results) : props.requestData([].concat(rickAndMortyState.data, data.results));
       setLoading(false);
