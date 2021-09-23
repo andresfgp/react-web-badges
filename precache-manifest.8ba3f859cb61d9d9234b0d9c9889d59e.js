@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "e836c6b45d0991379fa0",
+    "revision": "0afc7e438ed11b86be96",
     "url": "/web-badges/static/css/main.be698970.chunk.css"
   },
   {
-    "revision": "e836c6b45d0991379fa0",
-    "url": "/web-badges/static/js/main.e836c6b4.chunk.js"
+    "revision": "0afc7e438ed11b86be96",
+    "url": "/web-badges/static/js/main.0afc7e43.chunk.js"
   },
   {
     "revision": "b43403c4060f9fd091ed",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/web-badges/static/media/logo.0026b862.svg"
   },
   {
-    "revision": "58b0936c967ed7dadd2dc9fdcd4e2c0c",
+    "revision": "69203a48d64c6cf96e64791da0b96476",
     "url": "/web-badges/index.html"
   }
 ];
