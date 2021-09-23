@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect, useStore } from 'react-redux';
+import { connect } from 'react-redux';
 import md5 from 'md5';
 import badgeHeader from '../assets/static/badge-header.svg';
 import '../assets/styles/BadgeNew.css';
@@ -8,7 +8,7 @@ import { formRequest, addUsers } from '../actions';
 
 const BadgeNew = (props) => {
 
-  const store = useStore();
+  const { users = [] } = props;
 
   function generateUUID() { // Public Domain/MIT
     let d = new Date().getTime();//Timestamp
@@ -36,7 +36,6 @@ const BadgeNew = (props) => {
     id: '8000',
     name: '',
   };
-
   const [form, setValues] = useState(user1);
 
   const hash = md5(form.email);
@@ -46,23 +45,24 @@ const BadgeNew = (props) => {
 
   const handleInput = (e) => { //recopilar informacion de formulario
     form.id = generateUUID();
-    // console.log(store.getState());
     setValues({
       ...form,
       [e.target.name]: e.target.value,
     });
   };
-
   // eslint-disable-next-line react/destructuring-assignment
   props.formRequest(form);
 
   const handleSubmit = (e) => { // enviar informacion formulario
     e.preventDefault();
-    if (!store.getState().users.some((item) => item.id === form.id)) {
-      props.addUsers(form);
-      props.history.push('/');
+    try {
+      if (!users.some((item) => item.id === form.id)) {
+        props.addUsers(form);
+        props.history.push('/');
+      }
+    } catch (error) {
+      console.log('error', error);
     }
-    // console.log(store.getState());
   };
 
   return (
@@ -141,9 +141,15 @@ const BadgeNew = (props) => {
     </>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+  };
+};
 const mapDispatchToProps = {
   formRequest,
   addUsers,
 };
 
-export default connect(null, mapDispatchToProps)(BadgeNew);
+export default connect(mapStateToProps, mapDispatchToProps)(BadgeNew);

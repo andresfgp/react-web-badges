@@ -37,3 +37,8 @@ export const getSearchVideoRAndM = (payload) => ({
   type: 'GET_SEARCH_VIDEO_RANDM',
   payload,
 });
+
+export const getUsers = (payload) => ({
+  type: 'GET_USERS',
+  payload,
+});

@@ -9,13 +9,13 @@ import 'bootstrap/dist/css/bootstrap.css'; //estilos
 import './assets/styles/global.css'; //estilos globales
 
 // const initialState = {
-//   'rickAndMortyState': {
-//     data: '',
-//   },
-//   'user': {},
-//   'users': [],
-//   'searchResultBadges': [],
-//   'searchResultRAndM': [],
+// 'rickAndMortyState': {
+//   data: '',
+// },
+// 'user': {},
+// 'users': [],
+// 'searchResultBadges': [],
+// 'searchResultRAndM': [],
 // };
 
 const persistedState = localStorage.getItem('reduxState') ?

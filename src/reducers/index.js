@@ -5,6 +5,9 @@ const reducer = (state, action) => {
         ...state, //traer el estado que ya tengo
         user: action.payload,
       };
+    case 'GET_USERS':
+      if (action.payload === '') return { ...state, users: [] };
+      return state;
     case 'ADD_USERS':
       return {
         ...state, //traer el estado que ya tengo
@@ -44,13 +47,15 @@ const reducer = (state, action) => {
 
     case 'GET_SEARCH_VIDEO_BADGES':
       if (action.payload === '') return { ...state, searchResultBadges: [] };
-      return {
-        ...state,
-        searchResultBadges: state.users.filter((item) => item.name.toLowerCase().includes(action.payload.toLowerCase()) ||
+      if (state.users !== undefined) {
+        return {
+          ...state,
+          searchResultBadges: state.users.filter((item) => item.name.toLowerCase().includes(action.payload.toLowerCase()) ||
           item.twitter.toLowerCase().includes(action.payload.toLowerCase()) ||
           item.jobTitle.toLowerCase().includes(action.payload.toLowerCase())),
-      };
-
+        };
+      }
+      return state;
     case 'GET_SEARCH_VIDEO_RANDM':
       if (action.payload === '') return { ...state, searchResultRAndM: [] };
       if (state.rickAndMortyState.data.length > 0) {

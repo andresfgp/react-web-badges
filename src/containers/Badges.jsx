@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import '../assets/styles/Badges.css';
 import confLogo from '../assets/static/badge-header.svg';
-import { requestData } from '../actions';
+import { requestData, getUsers } from '../actions';
 import Loader from '../components/Loader';
 import Search from '../components/Search';
 import BadgesUsers from '../components/BadgesUsers';
@@ -11,7 +10,10 @@ import BadgesRAndM from '../components/BadgesRAndM';
 
 const Badges = (props) => {
 
-  const { rickAndMortyState, searchResultRAndM, users, searchResultBadges } = props;
+  const { rickAndMortyState = { data: [] },
+    searchResultRAndM = [],
+    users = [],
+    searchResultBadges = [], getUsers } = props;
 
   const [nextPage, setNextPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -40,6 +42,13 @@ const Badges = (props) => {
     setNextPage(nextPage + 1);
   };
 
+  const handleOnClick = (e) => {
+    if (users.length === 0) {
+      getUsers('');
+    }
+    props.history.push('/BadgeNew');
+  };
+
   return (
     <>
       <div className='Badges'>
@@ -58,9 +67,10 @@ const Badges = (props) => {
       </div>
       <div className='Badges__container'>
         <div className='Badges__buttons'>
-          <Link to='/BadgeNew' className='btn btn-primary'>
+          {/* eslint-disable-next-line react/button-has-type */}
+          <button onClick={handleOnClick} className='btn btn-primary'>
             New Badge
-          </Link>
+          </button>
         </div>
         <div className='Badges__list'>
           <div>
@@ -94,6 +104,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   requestData,
+  getUsers,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Badges);
