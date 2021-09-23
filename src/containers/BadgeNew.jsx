@@ -58,7 +58,7 @@ const BadgeNew = (props) => {
     try {
       if (!users.some((item) => item.id === form.id)) {
         props.addUsers(form);
-        props.history.push('/Badges');
+        props.history.push('/web-badges');
       }
     } catch (error) {
       console.log('error', error);

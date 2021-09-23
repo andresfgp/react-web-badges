@@ -10,7 +10,7 @@ const App = (props) => {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route exact path='/Badges' component={Badges} />
+          <Route exact path='/web-badges/' component={Badges} />
           <Route exact path='/BadgeNew' component={BadgeNew} />
           <Route exact path='/BadgeEdit/:id' component={BadgeEdit} />
         </Switch>
