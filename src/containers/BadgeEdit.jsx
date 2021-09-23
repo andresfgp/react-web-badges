@@ -47,7 +47,7 @@ const BadgeEdit = (props) => {
   const handleSubmit = (e) => { // enviar informacion formulario
     e.preventDefault();
     props.editDataId(user);
-    props.history.push('/');
+    props.history.push('/Badges');
   };
 
   const handleErase = (itemId) => {
