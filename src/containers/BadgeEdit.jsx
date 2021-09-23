@@ -128,10 +128,12 @@ const BadgeEdit = (props) => {
                     defaultValue={formID.twitter}
                   />
                 </div>
-                {/* eslint-disable-next-line react/button-has-type */}
-                <button className='btn btn-primary'> Edit</button>
-                {/* eslint-disable-next-line react/button-has-type */}
-                <button className='btn btn-danger ' onClick={() => handleErase(id)}> Erase</button>
+                <div className='container__buttons'>
+                  {/* eslint-disable-next-line react/button-has-type */}
+                  <button className='btn btn-primary'> Edit</button>
+                  {/* eslint-disable-next-line react/button-has-type */}
+                  <button className='btn btn-danger ' onClick={() => handleErase(id)}> Erase</button>
+                </div>
               </form>
             </div>
           </div>

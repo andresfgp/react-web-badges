@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <div className='Navbar'>
       <div className='container-fluid'>
-        <Link to='/' className='Navbar__brand'>
+        <Link to='/web-badges' className='Navbar__brand'>
           <img className='Navbar__brand-logo' src={logo} alt='Logo' />
           <span className='fw-light'>Home</span>
           <span className='fw-bold'>Conf</span>

@@ -8,3 +8,11 @@
     display: flex;
     justify-content: center;
 }
+
+@media only screen and (max-width: 640px)
+{
+    .container__buttons{
+        display: flex;
+        justify-content:center;
+    }
+}
